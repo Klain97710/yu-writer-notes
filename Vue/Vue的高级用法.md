@@ -1,5 +1,6 @@
 ---
 note: 指令、过滤器
+flag: blue
 ---
 # Vue高级用法
 

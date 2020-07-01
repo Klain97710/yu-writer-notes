@@ -1,5 +1,6 @@
 ---
 note: 基于vue + vuex + vue-router + axios + less + elementUI
+flag: blue
 ---
 # Vue开发中的小技巧及注意事项
 
