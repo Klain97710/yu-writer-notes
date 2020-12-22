@@ -1,5 +1,6 @@
 ---
 flag: blue
+note: 学习过程中写demo遇到的问题
 ---
 # Vue学习中遇到的问题
 
@@ -53,4 +54,50 @@ export default myUI
 // main.js
 import myUI from './myui/myui'
 Vue.use(myUI)
+```
+
+学了require.context方法后，进行改造：
+
+```javascript
+// myUI.js
+const context = require.context('./', false, /\.vue$/);
+const myUI = {
+  install: (vue, config) => {
+    context.keys().forEach(key => {
+      var component = context(key).default;
+      vue.component(component.name, component);
+    });
+  }
+}
+
+export default myUI
+```
+
+## keep-alive不生效问题
+
+项目中原本的写法是：
+
+```html
+// 父元素根节点页面
+<template>
+  <div class="layout">
+    <keep-alive v-if="$route.meta.keepAlive">
+      <router-view />
+    </keep-alive>
+    <router-view v-else></router-view>
+  </div>
+</template>
+```
+
+修改后：
+```html
+// 父元素根节点页面
+<template>
+  <div class="layout">
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"/>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
+  </div>
+</template>
 ```

@@ -110,7 +110,7 @@ watch: {
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Home',
   mixins: [],
@@ -125,6 +125,8 @@ export default {
   },
   created () {
   },
+  beforeMount() {
+  },
   mounted () {
   },
   beforeUpdate () {
@@ -136,8 +138,22 @@ export default {
   destroyed () {
   },
   methods: {
+    // 使用对象展开运算符将 mutations 混入 methods 方法
+    ...mapMutations(['setUserId']),
+    // 或 如果你想另取名字，使用对象形式
+    // 把 this.saveUserId 映射为 this.$store.mutations.setUserId
+    ...mapMutations({
+      saveUserId: 'setUserId'
+    })
   },
   computed: {
+    // 使用对象展开运算符将 getter 混入 computed 计算属性
+    ...mapGetters(['getUserId'])
+    // 或
+    // 把 this.userId 映射为 this.$store.getters.getUserId
+    ...mapGetters({
+      userId: 'getUserId'
+    })
   },
   filters: {
   }
@@ -355,20 +371,15 @@ import {
   MessageBox,
   Indicator,
   DatetimePicker
-} from 'mint-ui' Vue.use(DatetimePicker)
+} from 'mint-ui'
 
+Vue.use(DatetimePicker)
 Vue.prototype.SUCCESS_CODE = 0;
 Vue.prototype.$toast = Toast;
 Vue.prototype.$messagebox = MessageBox;
 Vue.prototype.$indicator = Indicator;
 Vue.prototype.axios = axios;
 ```
-
-## 旧系统手机及低版浏览器出现白屏问题的解决
-
-解决方式：在`main.js`引入`babel-polyfill`
-
-`import 'babel-polyfill'`
 
 ## 在vue的template里面使用style动态设置图片背景问题
 
