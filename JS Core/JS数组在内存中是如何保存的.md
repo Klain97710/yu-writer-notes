@@ -1,3 +1,39 @@
+---
+note: |-
+  1.JS数组在内存中是如何保存的
+  2.JS一些方法分析
+---
+# 数组方法概兮
+
+## Array.prototype.every
+
+`every()` 方法测试一个数组内的所有元素是否都能通过某个指定函数的测试，返回一个布尔值。
+**注意**：若收到一个空数组，此方法在一切情况下都会返回 `true`。
+
+```javascript
+const isBelowThreshold = (currentValue) => currentValue < 40;
+
+const array1 = [1, 30, 39, 29, 10, 13];
+
+console.log(array1.every(isBelowThreshold));
+// expected output: true
+```
+
+## Array.prototype.filter
+
+`filter()` 方法创建一个新数组，其包含通过所提供函数实现的测试的所有元素。
+
+```javascript
+const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+
+const result = words.filter(word => word.length > 6);
+
+console.log(result);
+// expected output: Array ["exuberant", "destruction", "present"]
+```
+
+
+
 # Javascript中的数组在内存中是如何保存的？
 
 大家在日常编码中，最长碰到的是数组和对象的操作，各种增删改查，但是你真的了解数组和对象么？数组的最基本概念就不解释了，详情看MDN文档——[数组](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)
